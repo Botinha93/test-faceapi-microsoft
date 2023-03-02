@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            body{
+                background-color: rgb(248, 248, 248);
+            }
+            #box1{
+                position: absolute;
+                width: calc( 90% - 100px);
+                background-color: rgba(230, 230, 230, 0.226);
+                top:0px;
+                left: 5%;
+                min-height: 100%;
+                padding: 50px;
+                border: #ececec 1px solid;
+            }
+            #box{
+                position: relative;
+                width: calc( 90% - 20px);
+                top:0px;
+                left: 5%;
+                padding: 10px;
+                display: flex;
+                flex-wrap: wrap;
+                flex-basis: 25em;
+            }
+            img{
+                width: 100%;
+            }
+            span {
+                flex-basis: 30%;
+            }
+            table {
+                flex-basis: 69%;
+                position: relative;
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+                margin-left: 0.5%;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+            th{
+                background-color: #7f5eb0;;
+            }
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+            p {
+                  font-size: 30px;
+                  padding-left: 47%;
+                margin-top: -20px;
+            }
+            .modal {
+                display:    none;
+                position:   fixed;
+                z-index:    1000;
+                top:        0;
+                left:       0;
+                height:     100%;
+                width:      100%;
+                background: rgba( 255, 255, 255, .8 ) ;
+            }
+
+            /* When the body has the loading class, we turn
+               the scrollbar off with overflow:hidden */
+            body.loading .modal {
+                overflow: hidden;   
+            }
+
+            /* Anytime the body has the loading class, our
+               modal element will be visible */
+            body.loading .modal {
+                display: block;
+            }
+            @media only screen and (max-width: 800px) {
+              span {
+                flex-basis: 100%;
+                }
+                table {
+                flex-basis: 100%;
+                margin-left: 0;
+                margin-bottom: 2%;
+                border-bottom: #7f5eb0 2px solid;
+                }
+                p {
+                  font-size: 30px;
+                  padding-left: 37%;
+                }
+            }
+            .loader {
+margin: 300px auto;
+font-size: 50px;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  text-indent: -9999em;
+  -webkit-animation: load5 1.1s infinite ease;
+  animation: load5 1.1s infinite ease;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+@-webkit-keyframes load5 {
+  0%,
+  100% {
+    box-shadow: 0em -2.6em 0em 0em #818181, 1.8em -1.8em 0 0em rgba(129,129,129, 0.2), 2.5em 0em 0 0em rgba(129,129,129, 0.2), 1.75em 1.75em 0 0em rgba(129,129,129, 0.2), 0em 2.5em 0 0em rgba(129,129,129, 0.2), -1.8em 1.8em 0 0em rgba(129,129,129, 0.2), -2.6em 0em 0 0em rgba(129,129,129, 0.5), -1.8em -1.8em 0 0em rgba(129,129,129, 0.7);
+  }
+  12.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(129,129,129, 0.7), 1.8em -1.8em 0 0em #818181, 2.5em 0em 0 0em rgba(129,129,129, 0.2), 1.75em 1.75em 0 0em rgba(129,129,129, 0.2), 0em 2.5em 0 0em rgba(129,129,129, 0.2), -1.8em 1.8em 0 0em rgba(129,129,129, 0.2), -2.6em 0em 0 0em rgba(129,129,129, 0.2), -1.8em -1.8em 0 0em rgba(129,129,129, 0.5);
+  }
+  25% {
+    box-shadow: 0em -2.6em 0em 0em rgba(129,129,129, 0.5), 1.8em -1.8em 0 0em rgba(129,129,129, 0.7), 2.5em 0em 0 0em #818181, 1.75em 1.75em 0 0em rgba(129,129,129, 0.2), 0em 2.5em 0 0em rgba(129,129,129, 0.2), -1.8em 1.8em 0 0em rgba(129,129,129, 0.2), -2.6em 0em 0 0em rgba(129,129,129, 0.2), -1.8em -1.8em 0 0em rgba(129,129,129, 0.2);
+  }
+  37.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(129,129,129, 0.2), 1.8em -1.8em 0 0em rgba(129,129,129, 0.5), 2.5em 0em 0 0em rgba(129,129,129, 0.7), 1.75em 1.75em 0 0em #818181, 0em 2.5em 0 0em rgba(129,129,129, 0.2), -1.8em 1.8em 0 0em rgba(129,129,129, 0.2), -2.6em 0em 0 0em rgba(129,129,129, 0.2), -1.8em -1.8em 0 0em rgba(129,129,129, 0.2);
+  }
+  50% {
+    box-shadow: 0em -2.6em 0em 0em rgba(129,129,129, 0.2), 1.8em -1.8em 0 0em rgba(129,129,129, 0.2), 2.5em 0em 0 0em rgba(129,129,129, 0.5), 1.75em 1.75em 0 0em rgba(129,129,129, 0.7), 0em 2.5em 0 0em #818181, -1.8em 1.8em 0 0em rgba(129,129,129, 0.2), -2.6em 0em 0 0em rgba(129,129,129, 0.2), -1.8em -1.8em 0 0em rgba(129,129,129, 0.2);
+  }
+  62.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(129,129,129, 0.2), 1.8em -1.8em 0 0em rgba(129,129,129, 0.2), 2.5em 0em 0 0em rgba(129,129,129, 0.2), 1.75em 1.75em 0 0em rgba(129,129,129, 0.5), 0em 2.5em 0 0em rgba(129,129,129, 0.7), -1.8em 1.8em 0 0em #818181, -2.6em 0em 0 0em rgba(129,129,129, 0.2), -1.8em -1.8em 0 0em rgba(129,129,129, 0.2);
+  }
+  75% {
+    box-shadow: 0em -2.6em 0em 0em rgba(129,129,129, 0.2), 1.8em -1.8em 0 0em rgba(129,129,129, 0.2), 2.5em 0em 0 0em rgba(129,129,129, 0.2), 1.75em 1.75em 0 0em rgba(129,129,129, 0.2), 0em 2.5em 0 0em rgba(129,129,129, 0.5), -1.8em 1.8em 0 0em rgba(129,129,129, 0.7), -2.6em 0em 0 0em #818181, -1.8em -1.8em 0 0em rgba(129,129,129, 0.2);
+  }
+  87.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(129,129,129, 0.2), 1.8em -1.8em 0 0em rgba(129,129,129, 0.2), 2.5em 0em 0 0em rgba(129,129,129, 0.2), 1.75em 1.75em 0 0em rgba(129,129,129, 0.2), 0em 2.5em 0 0em rgba(129,129,129, 0.2), -1.8em 1.8em 0 0em rgba(129,129,129, 0.5), -2.6em 0em 0 0em rgba(129,129,129, 0.7), -1.8em -1.8em 0 0em #818181;
+  }
+}
+@keyframes load5 {
+  0%,
+  100% {
+    box-shadow: 0em -2.6em 0em 0em #818181, 1.8em -1.8em 0 0em rgba(129,129,129, 0.2), 2.5em 0em 0 0em rgba(129,129,129, 0.2), 1.75em 1.75em 0 0em rgba(129,129,129, 0.2), 0em 2.5em 0 0em rgba(129,129,129, 0.2), -1.8em 1.8em 0 0em rgba(129,129,129, 0.2), -2.6em 0em 0 0em rgba(129,129,129, 0.5), -1.8em -1.8em 0 0em rgba(129,129,129, 0.7);
+  }
+  12.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(129,129,129, 0.7), 1.8em -1.8em 0 0em #818181, 2.5em 0em 0 0em rgba(129,129,129, 0.2), 1.75em 1.75em 0 0em rgba(129,129,129, 0.2), 0em 2.5em 0 0em rgba(129,129,129, 0.2), -1.8em 1.8em 0 0em rgba(129,129,129, 0.2), -2.6em 0em 0 0em rgba(129,129,129, 0.2), -1.8em -1.8em 0 0em rgba(129,129,129, 0.5);
+  }
+  25% {
+    box-shadow: 0em -2.6em 0em 0em rgba(129,129,129, 0.5), 1.8em -1.8em 0 0em rgba(129,129,129, 0.7), 2.5em 0em 0 0em #818181, 1.75em 1.75em 0 0em rgba(129,129,129, 0.2), 0em 2.5em 0 0em rgba(129,129,129, 0.2), -1.8em 1.8em 0 0em rgba(129,129,129, 0.2), -2.6em 0em 0 0em rgba(129,129,129, 0.2), -1.8em -1.8em 0 0em rgba(129,129,129, 0.2);
+  }
+  37.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(129,129,129, 0.2), 1.8em -1.8em 0 0em rgba(129,129,129, 0.5), 2.5em 0em 0 0em rgba(129,129,129, 0.7), 1.75em 1.75em 0 0em #818181, 0em 2.5em 0 0em rgba(129,129,129, 0.2), -1.8em 1.8em 0 0em rgba(129,129,129, 0.2), -2.6em 0em 0 0em rgba(129,129,129, 0.2), -1.8em -1.8em 0 0em rgba(129,129,129, 0.2);
+  }
+  50% {
+    box-shadow: 0em -2.6em 0em 0em rgba(129,129,129, 0.2), 1.8em -1.8em 0 0em rgba(129,129,129, 0.2), 2.5em 0em 0 0em rgba(129,129,129, 0.5), 1.75em 1.75em 0 0em rgba(129,129,129, 0.7), 0em 2.5em 0 0em #818181, -1.8em 1.8em 0 0em rgba(129,129,129, 0.2), -2.6em 0em 0 0em rgba(129,129,129, 0.2), -1.8em -1.8em 0 0em rgba(129,129,129, 0.2);
+  }
+  62.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(129,129,129, 0.2), 1.8em -1.8em 0 0em rgba(129,129,129, 0.2), 2.5em 0em 0 0em rgba(129,129,129, 0.2), 1.75em 1.75em 0 0em rgba(129,129,129, 0.5), 0em 2.5em 0 0em rgba(129,129,129, 0.7), -1.8em 1.8em 0 0em #818181, -2.6em 0em 0 0em rgba(129,129,129, 0.2), -1.8em -1.8em 0 0em rgba(129,129,129, 0.2);
+  }
+  75% {
+    box-shadow: 0em -2.6em 0em 0em rgba(129,129,129, 0.2), 1.8em -1.8em 0 0em rgba(129,129,129, 0.2), 2.5em 0em 0 0em rgba(129,129,129, 0.2), 1.75em 1.75em 0 0em rgba(129,129,129, 0.2), 0em 2.5em 0 0em rgba(129,129,129, 0.5), -1.8em 1.8em 0 0em rgba(129,129,129, 0.7), -2.6em 0em 0 0em #818181, -1.8em -1.8em 0 0em rgba(129,129,129, 0.2);
+  }
+  87.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(129,129,129, 0.2), 1.8em -1.8em 0 0em rgba(129,129,129, 0.2), 2.5em 0em 0 0em rgba(129,129,129, 0.2), 1.75em 1.75em 0 0em rgba(129,129,129, 0.2), 0em 2.5em 0 0em rgba(129,129,129, 0.2), -1.8em 1.8em 0 0em rgba(129,129,129, 0.5), -2.6em 0em 0 0em rgba(129,129,129, 0.7), -1.8em -1.8em 0 0em #818181;
+  }
+}
+
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div id="box1">
+            <p>Test AI</p>
+            <form action="/action_page.php" style="border-bottom: #7f5eb0 1px solid;">
+                <label for="myfile">Select a file:</label>
+                <input type="file" id="upload-photo" name="myfile">
+                <select name="language-picker-select" id="language-picker-select" style="float: right;">
+                  <option lang="pt" value="pt">Portugues</option>
+                  <option lang="en" value="english" selected>English</option>
+                </select><br><br>
+            </form>
+            <br>
+            <div id="box"></div>
+        </div>
+        <script>
+            document.getElementById("upload-photo").addEventListener("change", async function({target}){
+            document.body.classList.add('loading');
+            if (target.files && target.files.length) {
+                try {
+                    var span = document.createElement('span');
+                    span.innerHTML = ['<img class="thumb" src="', await convertFileToBase64(target.files[0]),'"/>'].join('');
+                    document.getElementById("box").appendChild(span);
+                    var myHeaders = new Headers();
+                    myHeaders.append("Ocp-Apim-Subscription-Key", "738ca86989ba4919a73e3656d1fcfe5b");
+                    myHeaders.append("conte", "application/json");
+                    myHeaders.append("Content-Type", "application/octet-stream");
+
+                    var raw = target.files[0];
+
+                    var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: 'follow'
+                    };
+
+                    fetch("https://eastus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false&returnFaceAttributes=blur,exposure,noise,age,gender,facialhair,glasses,hair,makeup,accessories,occlusion,headpose,emotion,smile,qualityforrecognition&recognitionModel=recognition_04&returnRecognitionModel=false&detectionModel=detection_01&faceIdTimeToLive=86400", requestOptions)
+                    .then(response => response.json())
+                    .then(result => {
+                        document.body.classList.remove('loading');
+                        var select = document.getElementById('language-picker-select');
+                        try{
+                        if(select.options[select.selectedIndex].value == "pt"){
+                            var table = document.createElement("table");
+                            var tr = document.createElement("tr");
+                            tr.appendChild(document.createElement("th"));
+                            tr.lastChild.textContent = "Atributo";
+                            tr.appendChild(document.createElement("th"));
+                            tr.lastChild.textContent = "Valor";
+                            table.appendChild(tr);
+                            var tr = document.createElement("tr");
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = "Idade";
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = result[0].faceAttributes.age;
+                            table.appendChild(tr);
+                            var tr = document.createElement("tr");
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = "Sexo";
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = result[0].faceAttributes.gender == "female" ? "Mulher" : "Homem";
+                            table.appendChild(tr);
+                            var tr = document.createElement("tr");
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = "Oculos";
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = result[0].faceAttributes.glasses;
+                            table.appendChild(tr);
+                            //facialhair
+                            var tr = document.createElement("tr");
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = "Pelo Facial";
+                            tr.appendChild(document.createElement("td"));
+                            var facialHair = "";
+                            var temp = {
+                                        "moustache":"Bigode",
+                                        "beard":"Barba",
+                                        "sideburns":"Costeletas"
+                                    }
+                            for (const [key, value] of Object.entries(result[0].faceAttributes.facialHair)){
+                                if(value>0){
+                                    facialHair= facialHair+ temp[key]+ ", ";
+                                }
+                            };
+                            if (facialHair == ""){
+                                facialHair = "Sem pelo facial";
+                            }
+                            tr.lastChild.textContent = facialHair;
+                            table.appendChild(tr);
+                            //Acessories
+                            var tr = document.createElement("tr");
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = "Acessorios";
+                            tr.appendChild(document.createElement("td"));
+                            var Acessorios = "";
+                            result[0].faceAttributes.accessories.forEach(element => {
+                                Acessorios= Acessorios + element.type + ", ";
+
+                            });
+                            if (Acessorios == ""){
+                                Acessorios = "Sem Acessorios";
+                            }
+                            tr.lastChild.textContent = Acessorios;
+                            table.appendChild(tr);
+                            //emotions
+                            var tr = document.createElement("tr");
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = "Emocões";
+                            tr.appendChild(document.createElement("td"));
+                            var emotions = "";
+                            var temp = {
+                                        "anger":"Raiva",
+                                        "contempt":"Desprezo",
+                                        "disgust":"Desgosto",
+                                        "happiness":"Felicidade",
+                                        "neutral":"Neutro",
+                                        "sadness":"Triste",
+                                        "surprise":"Surpresa"
+                                    }
+                            for (const [key, value] of Object.entries(result[0].faceAttributes.emotion)){
+                                if(value>0){
+                                    emotions= emotions+ temp[key]+ ", ";
+                                }
+                            };
+                            tr.lastChild.textContent = emotions;
+                            table.appendChild(tr);
+                            var tr = document.createElement("tr");
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = "Maquiagem";
+                            tr.appendChild(document.createElement("td"));
+                            var makeup = "";
+                            var temp = {
+                                        "eyeMakeup":"Olho",
+                                        "lipMakeup":"Labio"
+                                    }
+                            for (const [key, value] of Object.entries(result[0].faceAttributes.makeup)){
+                                    makeup = value ? makeup + temp[key] + ", " : makeup;
+                            };
+                            if (makeup == ""){
+                                makeup = "Sem maquiagem";
+                            }
+                            tr.lastChild.textContent = makeup;
+                            table.appendChild(tr);
+                            //haircolor
+                            var tr = document.createElement("tr");
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = "Cor do Cabelo";
+                            tr.appendChild(document.createElement("td"));
+                            var hairColor = "";
+                            result[0].faceAttributes.hair.hairColor.forEach(element => {
+                                if(element.confidence > 0.40){
+                                    var temp = {
+                                        "brown":"Marrom",
+                                        "red":"Vermelho",
+                                        "blond":"Loiro",
+                                        "black":"Preto",
+                                        "gray":"Cinza",
+                                        "white":"Branco",
+                                        "other":"Outro"
+                                    }
+                                    hairColor= hairColor + temp[element.color] + ", ";
+                                }
+                            });
+                            if (hairColor == ""){
+                                hairColor = "Careca";
+                            }
+                            tr.lastChild.textContent = hairColor;
+                            table.appendChild(tr);
+                            document.getElementById("box").appendChild(table);
+                        }else{
+                            var table = document.createElement("table");
+                            var tr = document.createElement("tr");
+                            tr.appendChild(document.createElement("th"));
+                            tr.lastChild.textContent = "Attributes";
+                            tr.appendChild(document.createElement("th"));
+                            tr.lastChild.textContent = "Value";
+                            table.appendChild(tr);
+                            var tr = document.createElement("tr");
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = "age";
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = result[0].faceAttributes.age;
+                            table.appendChild(tr);
+                            var tr = document.createElement("tr");
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = "gender";
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = result[0].faceAttributes.gender;
+                            table.appendChild(tr);
+                            var tr = document.createElement("tr");
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = "glasses";
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = result[0].faceAttributes.glasses;
+                            table.appendChild(tr);
+                            var tr = document.createElement("tr");
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = "emotion";
+                            tr.appendChild(document.createElement("td"));
+                            var emotions = "";
+                            for (const [key, value] of Object.entries(result[0].faceAttributes.emotion)){
+                                if(value>0){
+                                    emotions= emotions+key+ ", ";
+                                }
+                            };
+                            tr.lastChild.textContent = emotions;
+                            table.appendChild(tr);
+                            //facialhair
+                            var tr = document.createElement("tr");
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = "facialHair";
+                            tr.appendChild(document.createElement("td"));
+                            var facialHair = "";
+                            for (const [key, value] of Object.entries(result[0].faceAttributes.facialHair)){
+                                if(value>0){
+                                    facialHair= facialHair+ key+ ", ";
+                                }
+                            };
+                            if (facialHair == ""){
+                                facialHair = "No Facial Hair";
+                            }
+                            tr.lastChild.textContent = facialHair;
+                            table.appendChild(tr);
+                            //Acessories
+                            var tr = document.createElement("tr");
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = "accessories";
+                            tr.appendChild(document.createElement("td"));
+                            var Acessorios = "";
+                            result[0].faceAttributes.accessories.forEach(element => {
+                                Acessorios= Acessorios + element.type + ", ";
+
+                            });
+                            if (Acessorios == ""){
+                                Acessorios = "No accessories";
+                            }
+                            tr.lastChild.textContent = Acessorios;
+                            table.appendChild(tr);
+                            var tr = document.createElement("tr");
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = "makeup";
+                            tr.appendChild(document.createElement("td"));
+                            var makeup = "";
+                            for (const [key, value] of Object.entries(result[0].faceAttributes.makeup)){
+                                    makeup = value ? makeup + key + ", " : makeup;
+                            };
+                            if (makeup == ""){
+                                makeup = "No makeup";
+                            }
+                            tr.lastChild.textContent = makeup;
+                            table.appendChild(tr);
+                            var tr = document.createElement("tr");
+                            tr.appendChild(document.createElement("td"));
+                            tr.lastChild.textContent = "hairColor";
+                            tr.appendChild(document.createElement("td"));
+                            var hairColor = "";
+                            result[0].faceAttributes.hair.hairColor.forEach(element => {
+                                console.log(element.confidence)
+                                if(element.confidence > 0.40){
+                                    hairColor= hairColor + element.color + ", ";
+                                }
+                            });
+                            if (hairColor == ""){
+                                hairColor = "Bald";
+                            }
+                            tr.lastChild.textContent = hairColor;
+                            table.appendChild(tr);
+                            document.getElementById("box").appendChild(table);
+                        }
+                    }catch(erro){
+                        var table = document.createElement("table");
+                            var tr = document.createElement("tr");
+                            tr.appendChild(document.createElement("th"));
+                            tr.lastChild.textContent = "Erro";
+                            tr.lastChild.style.color= "white";
+                            tr.lastChild.style.textAlign= "center";
+                            tr.lastChild.style.fontSize= "100px";
+                            table.appendChild(tr);
+                            document.getElementById("box").appendChild(table);
+                    }
+                    })
+                    .catch(error => console.log('error', error));
+                } catch(e) {
+                    console.log(e);
+                    
+                }
+                }
+            })
+
+            function convertFileToBase64(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = reject;
+                });
+            }
+
+
+        </script>
+        <div class="modal">
+            <div class="loader">Loading...</div>
+        </div>
+    </body>
+</html>
